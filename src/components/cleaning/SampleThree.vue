@@ -1,219 +1,305 @@
 <template>
-  <div class="min-h-screen font-sans bg-white">
-    <!-- HERO — Premium Navy -->
-    <section class="relative min-h-screen flex items-center overflow-hidden pt-16" style="background: #0f172a;">
-      <!-- Sparkle pattern -->
-      <div class="absolute inset-0 overflow-hidden">
-        <div
-          v-for="(spark, i) in sparks"
-          :key="i"
-          class="absolute rounded-full bg-white"
-          :style="`width: ${spark.size}px; height: ${spark.size}px; top: ${spark.top}%; left: ${spark.left}%; opacity: ${spark.opacity}; animation: pulse ${spark.duration}s ease-in-out infinite; animation-delay: ${spark.delay}s;`"
-        ></div>
-      </div>
-      <div class="absolute bottom-0 left-0 right-0 h-1/2"
-        style="background: linear-gradient(to top, #1e3a5f15, transparent);"></div>
+  <div class="relative min-h-screen bg-[#0c0f14] font-sans text-white pb-20 md:pb-0 selection:bg-orange-500/30">
+    <!-- PLACEHOLDER FOR FACEBOOK/TIKTOK PIXEL SCRIPTS (in <head>) -->
 
-      <div class="relative max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
-        <div class="animate-in">
-          <div class="inline-flex items-center gap-2 border border-blue-400/30 text-blue-300 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full mb-8">
-            <span class="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block animate-pulse"></span>
-            ProShine Services · Melbourne, VIC
+    <!-- Internal brand header removed — global Tribe6 Navbar handles navigation -->
+    <!-- Brand shown within the hero panel below -->
+
+
+    <!-- HERO — Vertical Split: Before/After & Instant Quote Form -->
+    <section class="min-h-screen pt-[68px] flex flex-col lg:flex-row overflow-hidden">
+      <!-- LEFT: Before/After Slider Panel -->
+      <div class="w-full lg:w-1/2 relative flex flex-col items-center justify-center px-8 py-20 overflow-hidden bg-[#0c0f14]">
+        <!-- Drama glow -->
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none" style="background: radial-gradient(circle at 50% 50%, rgba(249,115,22,0.12) 0%, transparent 70%);"></div>
+
+        <div class="relative z-10 max-w-md w-full">
+          <!-- Brand name in left panel (replaces removed header) -->
+          <div class="font-black text-2xl tracking-tighter mb-6">
+            <span class="text-orange-500">Bright</span><span class="text-white">Touch.</span>
           </div>
-          <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            Premium Clean.<br />
-            <span class="text-transparent bg-clip-text" style="background: linear-gradient(90deg, #60a5fa, #38bdf8);">
-              Guaranteed.
-            </span>
+          <div class="inline-flex items-center gap-2 mb-4 px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+            <span class="text-[10px] font-black uppercase tracking-widest text-orange-400">Pooraka, Adelaide · Specialist Cleaning</span>
+          </div>
+
+          <h1 class="text-5xl md:text-6xl font-black leading-[1.05] tracking-tight mb-6">
+            The Ultimate Reset:<br/>
+            <span style="display:inline-block; background: linear-gradient(90deg, #f97316, #fb923c, #fdba74); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Carpet &amp; Oven</span><br/>
+            Specialists.
           </h1>
-          <p class="text-gray-400 text-lg leading-relaxed mb-8 max-w-lg">
-            ProShine is Melbourne's most awarded premium residential and commercial cleaning company. Trusted by 15,000+ households and businesses across Victoria.
+          <p class="text-slate-400 text-lg font-medium mb-10 max-w-sm">
+            Pooraka's #1 specialist for deep carpet extraction, professional oven restoration, and bond-back end-of-lease cleans.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <button
-              @click="scrollToForm"
-              class="px-8 py-4 font-bold text-[#0f172a] rounded-2xl transition-all duration-300 shadow-2xl hover:-translate-y-1 transform text-lg"
-              style="background: linear-gradient(135deg, #60a5fa, #38bdf8);"
-            >
-              Request a Quote
-            </button>
-            <button class="px-8 py-4 border border-white/20 hover:border-white/40 text-white font-medium rounded-2xl transition-all duration-300 hover:bg-white/5">
-              View Case Studies
-            </button>
-          </div>
 
-          <!-- Awards row -->
-          <div class="mt-10 flex flex-wrap gap-4">
-            <div v-for="award in awards" :key="award" class="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-2 rounded-xl">
-              <span class="text-blue-400 text-xs">★</span>
-              <span class="text-white/70 text-xs font-medium">{{ award }}</span>
+          <!-- Before / After Slider (CSS-based simulation) -->
+          <div class="relative w-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] mb-8 select-none" style="aspect-ratio: 16/9;">
+            <!-- AFTER side (full width, orange-hued clean) -->
+            <div class="absolute inset-0 flex items-center justify-center" style="background: linear-gradient(135deg, #1a1007, #2d1a0a);">
+              <div class="text-center">
+                <div class="text-5xl mb-2">✨</div>
+                <p class="text-orange-300 font-black text-xs uppercase tracking-widest">After: Bright Touch Result</p>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Stats vertical card -->
-        <div class="animate-in" style="animation-delay: 0.3s;">
-          <div class="rounded-3xl overflow-hidden border border-white/10" style="background: rgba(255,255,255,0.04); backdrop-filter: blur(20px);">
-            <div class="p-2">
-              <div class="rounded-2xl h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #1e3a5f, #0f172a);">
+            <!-- BEFORE side (clipped) -->
+            <div class="absolute inset-0 flex items-center justify-center overflow-hidden" :style="{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }">
+              <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, #1a1a1a, #2a2318);">
                 <div class="text-center">
-                  <div class="text-5xl mb-2">✨</div>
-                  <p class="text-white font-bold tracking-widest uppercase text-sm">ProShine Services</p>
-                  <p class="text-blue-300/60 text-xs mt-1">Melbourne, Victoria</p>
+                  <div class="text-5xl mb-2">😬</div>
+                  <p class="text-slate-400 font-black text-xs uppercase tracking-widest">Before</p>
                 </div>
               </div>
             </div>
-            <div class="p-6 grid grid-cols-2 gap-4">
-              <div v-for="kpi in kpis" :key="kpi.label" class="text-center p-4 rounded-2xl" style="background: rgba(255,255,255,0.05);">
-                <div class="text-2xl font-bold text-white mb-1">{{ kpi.value }}</div>
-                <div class="text-blue-300/60 text-xs">{{ kpi.label }}</div>
+            <!-- Divider line -->
+            <div class="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]" :style="{ left: sliderPosition + '%' }">
+              <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-white shadow-2xl flex items-center justify-center cursor-ew-resize">
+                <svg class="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l-3 3 3 3m8-6l3 3-3 3"/></svg>
               </div>
             </div>
-            <div class="px-6 pb-6">
-              <div class="rounded-2xl p-4 border border-blue-400/20" style="background: rgba(96,165,250,0.08);">
-                <p class="text-blue-300 text-xs font-semibold uppercase tracking-wider mb-2">Client Guarantee</p>
-                <p class="text-white/70 text-sm">If you're not 100% satisfied, we re-clean for free within 24 hours — no questions, no fuss.</p>
+            <!-- Drag input -->
+            <input type="range" min="0" max="100" v-model="sliderPosition"
+              class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize" />
+          </div>
+          <p class="text-[10px] text-slate-600 font-bold uppercase tracking-widest text-center">← Drag to Compare Results →</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: Multi-Step Instant Quote Form -->
+      <div class="w-full lg:w-1/2 bg-[#111520] flex items-center justify-center px-8 py-20 border-l border-white/5">
+        <div class="w-full max-w-md">
+          <h2 class="text-3xl font-black mb-2">Get My Bundle Quote</h2>
+          <p class="text-slate-500 font-medium mb-8">Instant pricing in under 60 seconds — no obligation.</p>
+
+          <!-- Step indicator -->
+          <div class="flex items-center gap-3 mb-10">
+            <div v-for="s in 3" :key="s"
+              :class="['h-1.5 rounded-full flex-1 transition-all duration-500', s <= currentStep ? 'bg-orange-500' : 'bg-white/10']"></div>
+          </div>
+
+          <!-- STEP 1: Select Service -->
+          <div v-if="currentStep === 1" class="space-y-6">
+            <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 mb-4">Step 1 — Select Service(s)</p>
+            <div class="space-y-3">
+              <div v-for="svc in services" :key="svc.name"
+                @click="toggleService(svc.name)"
+                :class="[
+                  'relative group flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all',
+                  selectedServices.includes(svc.name)
+                    ? 'bg-orange-500/10 border-orange-500/60 shadow-[0_0_20px_rgba(249,115,22,0.15)]'
+                    : 'bg-white/[0.02] border-white/5 hover:border-white/20'
+                ]">
+                <div class="text-2xl">{{ svc.icon }}</div>
+                <div class="flex-1">
+                  <p class="font-black text-sm">{{ svc.name }}</p>
+                  <p class="text-slate-500 text-xs font-medium">{{ svc.desc }}</p>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <span class="font-black text-orange-400 text-sm">{{ svc.price }}</span>
+                  <span v-if="svc.bundle" class="text-[9px] font-black uppercase tracking-widest bg-orange-500 text-white px-2 py-0.5 rounded-full">Bundle & Save</span>
+                </div>
+                <div v-if="selectedServices.includes(svc.name)"
+                  class="absolute top-3 right-3 w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center">
+                  <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- STATS dark band -->
-    <section style="background: #1e3a5f;" class="py-10">
-      <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div v-for="stat in stats" :key="stat.label" class="text-center animate-in">
-          <div class="text-3xl font-bold text-white">{{ stat.value }}</div>
-          <div class="text-blue-300/70 text-sm mt-1">{{ stat.label }}</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES grid -->
-    <section class="py-20 px-6 bg-gray-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-14 animate-in">
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-          <p class="text-gray-500 text-lg">From weekly maintenance to full commercial contracts.</p>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div
-            v-for="service in serviceCards"
-            :key="service.name"
-            class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-in group"
-          >
-            <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:-rotate-3 transition-transform duration-200" :style="`background: ${service.bg};`">
-              {{ service.icon }}
-            </div>
-            <h3 class="font-bold text-gray-900 text-lg mb-2">{{ service.name }}</h3>
-            <p class="text-gray-500 text-sm leading-relaxed mb-4">{{ service.desc }}</p>
-            <div class="flex items-center justify-between">
-              <span class="text-blue-600 font-bold text-sm">{{ service.price }}</span>
-              <span class="text-xs text-gray-400 bg-gray-50 px-3 py-1 rounded-full">{{ service.tag }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BENEFITS -->
-    <section class="py-20 px-6 bg-white">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-14 animate-in">
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">The ProShine Standard</h2>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div v-for="benefit in benefits" :key="benefit.title"
-            class="p-6 rounded-2xl border-2 border-transparent hover:border-blue-100 bg-gray-50 hover:bg-blue-50 transition-all duration-300 hover:-translate-y-1 animate-in">
-            <div class="text-3xl mb-4">{{ benefit.icon }}</div>
-            <h3 class="font-bold text-gray-900 mb-2">{{ benefit.title }}</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">{{ benefit.desc }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LEAD FORM -->
-    <section id="lead-form-6" style="background: #0f172a;" class="py-20 px-6">
-      <div class="max-w-xl mx-auto animate-in">
-        <div class="text-center mb-10">
-          <h2 class="text-4xl font-bold text-white mb-3">Get Your Custom Quote</h2>
-          <p class="text-blue-300 text-lg">Receive a tailored quote within 60 minutes. No lock-in contracts.</p>
-        </div>
-
-        <div v-if="!submitted" class="rounded-3xl p-8 border border-white/10" style="background: rgba(255,255,255,0.05);">
-          <form @submit.prevent="handleSubmit" class="space-y-5">
-            <div>
-              <label class="block text-blue-200 text-sm font-semibold mb-2">Full Name *</label>
-              <input
-                v-model="form.name"
-                type="text"
-                placeholder="Your full name"
-                class="w-full px-4 py-3.5 rounded-xl bg-white/10 border text-white placeholder-white/30 focus:outline-none focus:border-blue-400 transition-colors"
-                :class="errors.name ? 'border-red-400' : 'border-white/10'"
-              />
-              <p v-if="errors.name" class="text-red-400 text-xs mt-1.5">{{ errors.name }}</p>
-            </div>
-            <div>
-              <label class="block text-blue-200 text-sm font-semibold mb-2">Email Address *</label>
-              <input
-                v-model="form.email"
-                type="email"
-                placeholder="you@email.com"
-                class="w-full px-4 py-3.5 rounded-xl bg-white/10 border text-white placeholder-white/30 focus:outline-none focus:border-blue-400 transition-colors"
-                :class="errors.email ? 'border-red-400' : 'border-white/10'"
-              />
-              <p v-if="errors.email" class="text-red-400 text-xs mt-1.5">{{ errors.email }}</p>
-            </div>
-            <div>
-              <label class="block text-blue-200 text-sm font-semibold mb-2">Property Type</label>
-              <select v-model="form.concern" class="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/10 text-white focus:outline-none focus:border-blue-400 appearance-none">
-                <option value="" class="text-gray-800">Select property type…</option>
-                <option v-for="t in propertyTypes" :key="t" :value="t" class="text-gray-800">{{ t }}</option>
-              </select>
-            </div>
-            <button
-              type="submit"
-              class="w-full py-4 font-bold text-[#0f172a] rounded-xl transition-all duration-300 hover:-translate-y-0.5 transform shadow-xl text-lg"
-              style="background: linear-gradient(135deg, #60a5fa, #38bdf8);"
-            >
-              Request My Custom Quote ✨
+            <button @click="currentStep = 2" :disabled="selectedServices.length === 0"
+              :class="['w-full py-4 rounded-xl font-black uppercase tracking-widest text-sm transition-all', selectedServices.length ? 'bg-orange-500 text-white hover:bg-orange-600 shadow-[0_10px_30px_rgba(249,115,22,0.3)] hover:scale-[1.02]' : 'bg-white/5 text-slate-600 cursor-not-allowed']">
+              Next: My Details →
             </button>
-          </form>
+          </div>
+
+          <!-- STEP 2: Details -->
+          <div v-if="currentStep === 2" class="space-y-5">
+            <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 mb-4">Step 2 — Your Details</p>
+            <input v-model="form.name" type="text" placeholder="Full Name"
+              class="w-full bg-white/[0.04] border border-white/10 rounded-xl px-5 py-4 text-white text-sm font-bold placeholder:text-slate-600 outline-none focus:border-orange-500/50 focus:bg-white/[0.07] transition-all"/>
+            <input v-model="form.email" type="email" placeholder="Email Address"
+              class="w-full bg-white/[0.04] border border-white/10 rounded-xl px-5 py-4 text-white text-sm font-bold placeholder:text-slate-600 outline-none focus:border-orange-500/50 focus:bg-white/[0.07] transition-all"/>
+            <input v-model="form.phone" type="tel" placeholder="Phone Number"
+              class="w-full bg-white/[0.04] border border-white/10 rounded-xl px-5 py-4 text-white text-sm font-bold placeholder:text-slate-600 outline-none focus:border-orange-500/50 focus:bg-white/[0.07] transition-all"/>
+            <div class="flex gap-3">
+              <button @click="currentStep = 1"
+                class="flex-1 py-4 rounded-xl font-black uppercase tracking-widest text-sm bg-white/5 text-slate-400 hover:bg-white/10 transition-all">
+                ← Back
+              </button>
+              <button @click="handleNextStep"
+                class="flex-[2] py-4 rounded-xl font-black uppercase tracking-widest text-sm bg-orange-500 text-white hover:bg-orange-600 shadow-[0_10px_30px_rgba(249,115,22,0.3)] hover:scale-[1.02] transition-all">
+                Get My Quote →
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Confirmation -->
+          <div v-if="currentStep === 3" class="text-center py-10">
+            <div class="w-20 h-20 rounded-full bg-orange-500/20 flex items-center justify-center mx-auto mb-6">
+              <svg class="w-10 h-10 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="text-3xl font-black text-white mb-3">Quote Sent!</h3>
+            <p class="text-slate-500 font-medium">We'll call {{ form.name }} within 30 minutes with your bundle pricing.</p>
+            <div class="mt-8 inline-flex items-center gap-2 px-5 py-2.5 bg-orange-500/10 border border-orange-500/20 rounded-full">
+              <span class="text-xs font-black uppercase tracking-widest text-orange-400">TikTok Before/After Campaign Active</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIALIST BENTO BOX -->
+    <section class="py-32 px-6 bg-[#0e1219]">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-black tracking-tight">The Specialist Bento Box</h2>
+          <p class="text-slate-500 text-xl font-medium mt-4">Combine services to unlock exclusive bundle discounts.</p>
         </div>
 
-        <div v-else class="rounded-3xl p-12 text-center border border-white/10" style="background: rgba(255,255,255,0.05);">
-          <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style="background: linear-gradient(135deg, #60a5fa, #38bdf8);">
-            <svg class="w-10 h-10 text-[#0f172a]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div v-for="pkg in packages" :key="pkg.name"
+            class="group relative rounded-3xl border border-white/8 bg-white/[0.02] p-8 hover:bg-white/[0.05] hover:border-orange-500/30 hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+            <div v-if="pkg.badge" class="absolute top-4 right-4 text-[9px] font-black uppercase tracking-widest bg-orange-500 text-white px-3 py-1.5 rounded-full shadow-[0_4px_12px_rgba(249,115,22,0.4)]">
+              {{ pkg.badge }}
+            </div>
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style="background: radial-gradient(circle at 50% 0%, rgba(249,115,22,0.06) 0%, transparent 60%);"></div>
+            <div class="text-4xl mb-6">{{ pkg.icon }}</div>
+            <h3 class="text-xl font-black mb-3">{{ pkg.name }}</h3>
+            <p class="text-slate-500 text-sm leading-relaxed mb-8">{{ pkg.desc }}</p>
+            <div class="flex items-end justify-between pt-6 border-t border-white/5">
+              <div>
+                <span v-if="pkg.oldPrice" class="text-sm text-slate-600 line-through mr-2">{{ pkg.oldPrice }}</span>
+                <span class="text-2xl font-black text-orange-400">{{ pkg.price }}</span>
+              </div>
+              <button @click="scrollToQuote"
+                class="text-[10px] font-black uppercase tracking-widest text-orange-500 hover:text-orange-400 transition-colors">
+                Select →
+              </button>
+            </div>
           </div>
-          <h3 class="text-3xl font-bold text-white mb-3">Quote Request Received!</h3>
-          <p class="text-blue-300 text-lg">Thanks, <strong>{{ form.name }}</strong>! A ProShine consultant will email {{ form.email }} within 60 minutes.</p>
-          <button @click="submitted = false" class="mt-6 text-blue-400/60 underline text-sm hover:text-blue-300 transition-colors">Submit another</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEFORE/AFTER PROOF STRIP -->
+    <section class="py-20 bg-orange-500 overflow-hidden">
+      <div class="max-w-6xl mx-auto px-6 flex flex-wrap justify-around gap-10 text-center">
+        <div v-for="stat in stats" :key="stat.label">
+          <div class="text-4xl font-black text-white mb-1">{{ stat.value }}</div>
+          <div class="text-orange-200 text-[10px] font-bold uppercase tracking-widest">{{ stat.label }}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEAD GENERATION FORM -->
+    <section id="brighttouch-lead-form" class="py-24 px-6 bg-[#0c0f14]">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-[#111520] rounded-3xl border border-white/8 overflow-hidden">
+          <div class="flex flex-col lg:flex-row">
+            <!-- Left panel branding -->
+            <div class="lg:w-2/5 bg-orange-500 p-10 flex flex-col justify-center">
+              <p class="text-[10px] font-black uppercase tracking-[0.4em] text-orange-100/70 mb-4">Free Quote · No Obligation</p>
+              <h2 class="text-3xl font-black text-white leading-tight mb-6">Get Your Specialist Quote in 60 Seconds</h2>
+              <ul class="space-y-3">
+                <li class="flex items-center gap-3 text-orange-100 text-sm font-bold">
+                  <span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </span>
+                  Same-day availability
+                </li>
+                <li class="flex items-center gap-3 text-orange-100 text-sm font-bold">
+                  <span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </span>
+                  100% Bond-Back Guarantee
+                </li>
+                <li class="flex items-center gap-3 text-orange-100 text-sm font-bold">
+                  <span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </span>
+                  4.9 ★ Google Rating
+                </li>
+              </ul>
+            </div>
+
+            <!-- Right panel form -->
+            <div class="lg:w-3/5 p-10">
+              <!-- Success state -->
+              <div v-if="leadSubmitted" class="h-full flex flex-col items-center justify-center text-center py-8">
+                <div class="w-16 h-16 rounded-full bg-orange-500/20 border border-orange-500/30 flex items-center justify-center mx-auto mb-5">
+                  <svg class="w-8 h-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h3 class="text-2xl font-black text-white mb-2">Quote Request Sent!</h3>
+                <p class="text-slate-500 font-medium">We'll call <strong class="text-orange-400">{{ leadForm.name }}</strong> within 30 minutes with your bundle pricing.</p>
+              </div>
+
+              <!-- Form state -->
+              <form v-else @submit.prevent="handleLeadSubmit" class="space-y-5">
+                <div>
+                  <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 mb-5">Your Details</p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-1.5">Full Name *</label>
+                    <input v-model="leadForm.name" type="text" placeholder="e.g. Tom Wilson"
+                      class="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-bold placeholder:text-slate-600 outline-none focus:border-orange-500/50 transition-all"/>
+                    <p v-if="leadErrors.name" class="text-[10px] text-orange-400 font-bold mt-1">{{ leadErrors.name }}</p>
+                  </div>
+                  <div>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-1.5">Phone Number *</label>
+                    <input v-model="leadForm.phone" type="tel" placeholder="04XX XXX XXX"
+                      class="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-bold placeholder:text-slate-600 outline-none focus:border-orange-500/50 transition-all"/>
+                    <p v-if="leadErrors.phone" class="text-[10px] text-orange-400 font-bold mt-1">{{ leadErrors.phone }}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-1.5">Email Address *</label>
+                  <input v-model="leadForm.email" type="email" placeholder="you@email.com"
+                    class="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-bold placeholder:text-slate-600 outline-none focus:border-orange-500/50 transition-all"/>
+                  <p v-if="leadErrors.email" class="text-[10px] text-orange-400 font-bold mt-1">{{ leadErrors.email }}</p>
+                </div>
+
+                <div>
+                  <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-2">Service Needed</label>
+                  <div class="flex flex-wrap gap-2">
+                    <button v-for="svc in ['Carpet Clean', 'Oven Restore', 'End of Lease', 'Bundle Deal']" :key="svc" type="button"
+                      @click="leadForm.service = svc"
+                      :class="['px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all border',
+                               leadForm.service === svc
+                                 ? 'bg-orange-500 text-white border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.3)]'
+                                 : 'bg-white/[0.03] text-slate-400 border-white/10 hover:border-orange-500/40']">
+                      {{ svc }}
+                    </button>
+                  </div>
+                </div>
+
+                <button type="submit"
+                  class="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-black rounded-xl uppercase tracking-widest text-sm shadow-[0_10px_30px_rgba(249,115,22,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all mt-2">
+                  Get My Free Quote →
+                </button>
+                <p class="text-center text-[10px] text-slate-600 font-bold">Same-Day Response · Pooraka, Adelaide · No Spam</p>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-12 px-6 border-t border-white/5" style="background: #060c18;">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <p class="font-bold text-white text-xl">ProShine Services</p>
-          <p class="text-blue-400/50 text-sm mt-1">Melbourne, VIC · Premium Cleaning Solutions</p>
-        </div>
-        <div class="flex items-center gap-4">
-          <a v-for="social in socials" :key="social.name" :href="social.url" target="_blank" rel="noopener"
-            class="w-10 h-10 rounded-full border border-white/10 hover:border-blue-400/40 flex items-center justify-center text-white/60 hover:text-blue-300 transition-all duration-200 hover:-translate-y-0.5"
-            :aria-label="social.name">
-            <span v-html="social.icon"></span>
-          </a>
-        </div>
-        <p class="text-white/20 text-xs text-center md:text-right">
-          © 2026 ProShine Services. All rights reserved.<br/>
-          <span class="text-white/10">A Tribe6 Portfolio Sample</span>
-        </p>
+    <footer class="py-20 bg-[#0a0d12] border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-6">
+        <p class="text-xl font-black"><span class="text-orange-500">Bright</span>Touch Cleaning</p>
+        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-orange-700">Pooraka · Adelaide · 2026</p>
+        <p class="text-white/20 text-[10px] font-bold uppercase tracking-widest">© 2026 Bright Touch Cleaning · All Rights Reserved</p>
       </div>
     </footer>
+
+    <!-- MOBILE STICKY BOTTOM BAR -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-[#0c0f14]/95 backdrop-blur-lg border-t border-white/10 shadow-[0_-8px_30px_rgba(0,0,0,0.4)] md:hidden z-[150]">
+      <button @click="scrollToQuote"
+        class="w-full bg-orange-500 text-white font-black py-4 rounded-xl shadow-[0_10px_25px_rgba(249,115,22,0.35)] uppercase tracking-widest text-sm active:scale-95 transition-all">
+        Get My Free Quote
+      </button>
+    </div>
   </div>
 </template>
 
@@ -223,74 +309,57 @@ import { useAnimateIn } from '../../composables/useAnimateIn'
 
 const { initAnimations } = useAnimateIn()
 
-// Random sparkle particles
-const sparks = Array.from({ length: 30 }, () => ({
-  size: Math.random() * 3 + 1,
-  top: Math.random() * 100,
-  left: Math.random() * 100,
-  opacity: Math.random() * 0.3 + 0.05,
-  duration: Math.random() * 3 + 2,
-  delay: Math.random() * 3,
-}))
+const sliderPosition = ref(50)
+const currentStep = ref(1)
+const selectedServices = ref([])
+const form = ref({ name: '', email: '', phone: '' })
 
-const awards = ['RACV Recommended 2025', 'Top Rated VIC 2024', 'ISO 9001 Certified', 'Master Cleaners Assoc.']
+// Lead gen form
+const leadForm = ref({ name: '', email: '', phone: '', service: '' })
+const leadErrors = ref({})
+const leadSubmitted = ref(false)
 
-const kpis = [
-  { value: '15k+', label: 'Clients Served' },
-  { value: '4.9★', label: 'Google Rating' },
-  { value: '8 yrs', label: 'In Business' },
-  { value: '100%', label: 'Satisfaction Rate' },
+const services = [
+  { icon: '🧹', name: 'Carpet Deep Clean', desc: 'Hot water extraction for all carpet types', price: 'From $119', bundle: false },
+  { icon: '🔥', name: 'Oven Restoration', desc: 'Full chemical soak & professional scrub', price: 'From $89',  bundle: false },
+  { icon: '🏠', name: 'End-of-Lease',      desc: 'Bond-back guaranteed full clean',          price: 'From $299', bundle: true  },
+]
+
+const packages = [
+  { icon: '🧹', name: 'Carpet Specialist', desc: 'Industrial hot-water extraction leaving every fibre spotless and fresh.', price: '$119+', badge: null, oldPrice: null },
+  { icon: '🔥', name: 'Oven Restore',      desc: 'Complete oven deconstruction, soak treatment, and interior restoration.', price: '$89+', badge: null, oldPrice: null },
+  { icon: '🏆', name: 'Bond-Back Bundle',  desc: 'Carpet + Oven + Full End-of-Lease. Our most popular package — bond guaranteed.', price: '$449', badge: 'Bundle & Save', oldPrice: '$507' },
 ]
 
 const stats = [
-  { value: '15k+', label: 'Properties Cleaned' },
-  { value: '4.9/5', label: 'Average Rating' },
-  { value: '<60min', label: 'Response Time' },
-  { value: '24hr', label: 'Re-clean Guarantee' },
+  { value: '4,800+', label: 'Specialist Jobs' },
+  { value: '100%',   label: 'Bond-Back Rate' },
+  { value: '4.9 ★',  label: 'Google Rating' },
+  { value: 'Same Day', label: 'Availability' },
 ]
 
-const serviceCards = [
-  { icon: '🏠', name: 'Residential Standard', desc: 'Thorough weekly or fortnightly cleaning for apartments and houses.', price: 'From $149', tag: 'Most Popular', bg: 'rgba(96,165,250,0.1)' },
-  { icon: '🔍', name: 'Deep Clean', desc: 'Top-to-bottom intensive clean — perfect before moving in or out.', price: 'From $299', tag: 'Full Day', bg: 'rgba(56,189,248,0.1)' },
-  { icon: '🏢', name: 'Commercial', desc: 'Office and retail cleaning on daily, weekly, or monthly schedules.', price: 'Custom Quote', tag: 'B2B', bg: 'rgba(99,102,241,0.1)' },
-  { icon: '🚪', name: 'End of Lease', desc: 'Bond-back guaranteed cleaning for landlords and tenants.', price: 'From $449', tag: 'Guaranteed', bg: 'rgba(34,211,238,0.1)' },
-  { icon: '✈️', name: 'Airbnb Turnover', desc: 'Fast, hotel-standard turnaround between guests.', price: 'From $99', tag: 'Per Turnover', bg: 'rgba(52,211,153,0.1)' },
-  { icon: '🏗️', name: 'Post-Construction', desc: 'Remove dust, debris, and construction residue from new builds.', price: 'Custom Quote', tag: 'Specialist', bg: 'rgba(251,191,36,0.1)' },
-]
-
-const benefits = [
-  { icon: '🛡️', title: 'Fully Insured', desc: 'All staff are police-checked, fully insured, and professionally trained.' },
-  { icon: '⚙️', title: 'Pro-Grade Equipment', desc: 'Industrial HEPA vacuums, steam cleaners, and hospital-grade solutions.' },
-  { icon: '📱', title: 'Online Booking', desc: 'Book, reschedule, and manage cleans from your phone 24/7.' },
-  { icon: '✅', title: '100% Satisfaction', desc: 'Not happy? We re-clean within 24 hours at zero cost, guaranteed.' },
-]
-
-const propertyTypes = ['Apartment / Unit', 'House (1–2 bed)', 'House (3–4 bed)', 'House (5+ bed)', 'Office / Commercial', 'Retail Space', 'New Construction']
-
-const socials = [
-  { name: 'Instagram', url: 'https://instagram.com', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>` },
-  { name: 'Facebook', url: 'https://facebook.com', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>` },
-  { name: 'TikTok', url: 'https://tiktok.com', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>` },
-  { name: 'LinkedIn', url: 'https://linkedin.com', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>` },
-]
-
-const form = ref({ name: '', email: '', concern: '' })
-const errors = ref({})
-const submitted = ref(false)
-
-function scrollToForm() {
-  document.getElementById('lead-form-6')?.scrollIntoView({ behavior: 'smooth' })
+function toggleService(name) {
+  const idx = selectedServices.value.indexOf(name)
+  if (idx === -1) selectedServices.value.push(name)
+  else selectedServices.value.splice(idx, 1)
 }
 
-function handleSubmit() {
-  errors.value = {}
-  if (!form.value.name.trim()) errors.value.name = 'Full name is required.'
-  if (!form.value.email.trim()) {
-    errors.value.email = 'Email is required.'
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)) {
-    errors.value.email = 'Please enter a valid email.'
+function handleNextStep() {
+  if (form.value.name.trim() && form.value.email.includes('@')) {
+    currentStep.value = 3
   }
-  if (Object.keys(errors.value).length === 0) submitted.value = true
+}
+
+function scrollToQuote() {
+  document.getElementById('brighttouch-lead-form')?.scrollIntoView({ behavior: 'smooth' })
+}
+
+function handleLeadSubmit() {
+  leadErrors.value = {}
+  if (!leadForm.value.name.trim()) leadErrors.value.name = 'Required'
+  if (!leadForm.value.phone.trim()) leadErrors.value.phone = 'Required'
+  if (!leadForm.value.email.trim() || !leadForm.value.email.includes('@')) leadErrors.value.email = 'Valid email required'
+  if (Object.keys(leadErrors.value).length === 0) leadSubmitted.value = true
 }
 
 let observer = null

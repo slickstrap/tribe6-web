@@ -136,7 +136,7 @@ const props = defineProps({
 const emit = defineEmits(['switch'])
 
 const cosmeticsLabels = ['Maison Éclat', 'Pure North Beauty', 'Velour & Co.']
-const cleaningLabels  = ['Brightside Clean Co.', 'Coastal Clear', 'ProShine Services']
+const cleaningLabels  = ['Cleanworks Adelaide', 'MY HOME Cleaning', 'BrightTouch Specialist']
 
 const openMenu   = ref(null)
 const mobileOpen = ref(false)
@@ -162,7 +162,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .tribe-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 50;
+  z-index: 200;
   background: #0d0d1a;
   border-bottom: 2px solid transparent;
   background-clip: padding-box;
