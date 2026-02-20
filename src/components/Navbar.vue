@@ -5,12 +5,19 @@
   >
     <div class="tribe-nav__inner">
       <!-- ── Brand ── -->
-      <div class="tribe-nav__brand" @click="handleSwitch('cosmetics', 1)">
+      <div class="tribe-nav__brand" @click="$emit('go-home')">
         <span class="tribe-nav__logo-text">Tribe6</span>
+        <span class="tribe-nav__home-pill" :class="{ 'tribe-nav__home-pill--active': currentPage === 'portfolio' }">Portfolio</span>
       </div>
 
       <!-- ── Desktop links ── -->
       <div class="tribe-nav__links">
+        <button 
+          class="tribe-nav__btn" 
+          :class="{ 'tribe-nav__btn--active': currentPage === 'case-study' }"
+          @click="$emit('go-case-study')"
+        >Case Study</button>
+        <span class="tribe-nav__work-label">Sample Work:</span>
 
         <!-- Cosmetics dropdown -->
         <div
@@ -20,11 +27,11 @@
         >
           <button
             class="tribe-nav__btn"
-            :class="{ 'tribe-nav__btn--active': activeNiche === 'cosmetics' && activePage === 'portfolio' }"
+            :class="{ 'tribe-nav__btn--active': activeNiche === 'cosmetics' && currentPage === 'sample' }"
             @click="toggleDropdown('cosmetics')"
           >
             <span class="tribe-nav__dot tribe-nav__dot--rose"></span>
-            Canadian Cosmetics
+            Cosmetics Samples
             <svg class="tribe-nav__chevron" :class="{ 'tribe-nav__chevron--open': openMenu === 'cosmetics' }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
@@ -53,11 +60,11 @@
         >
           <button
             class="tribe-nav__btn"
-            :class="{ 'tribe-nav__btn--active': activeNiche === 'cleaning' && activePage === 'portfolio' }"
+            :class="{ 'tribe-nav__btn--active': activeNiche === 'cleaning' && currentPage === 'sample' }"
             @click="toggleDropdown('cleaning')"
           >
             <span class="tribe-nav__dot tribe-nav__dot--sky"></span>
-            Australian Cleaning
+            Cleaning Samples
             <svg class="tribe-nav__chevron" :class="{ 'tribe-nav__chevron--open': openMenu === 'cleaning' }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
@@ -98,7 +105,13 @@
     <!-- ── Mobile menu ── -->
     <Transition name="drop">
       <div v-if="mobileOpen" class="tribe-nav__mobile">
-        <p class="tribe-nav__mobile-label">Canadian Cosmetics</p>
+        <button 
+          class="tribe-nav__mobile-item" 
+          :class="{ 'tribe-nav__mobile-item--active': currentPage === 'case-study' }"
+          @click="$emit('go-case-study'); mobileOpen = false"
+        >Case Study</button>
+        
+        <p class="tribe-nav__mobile-label">Cosmetics Samples</p>
         <button
           v-for="n in 3"
           :key="`mc${n}`"
@@ -109,8 +122,8 @@
           <span class="tribe-nav__dot tribe-nav__dot--rose"></span>
           {{ cosmeticsLabels[n - 1] }}
         </button>
-
-        <p class="tribe-nav__mobile-label" style="margin-top:1rem">Australian Cleaning</p>
+ 
+        <p class="tribe-nav__mobile-label" style="margin-top:1rem">Cleaning Samples</p>
         <button
           v-for="n in 3"
           :key="`mcl${n}`"
@@ -130,10 +143,11 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
-  activeNiche: String,
+  activeNiche:  String,
   activeSample: Number,
+  currentPage:  String,
 })
-const emit = defineEmits(['switch'])
+const emit = defineEmits(['switch', 'go-home', 'go-case-study'])
 
 const cosmeticsLabels = ['Maison Éclat', 'Pure North Beauty', 'Velour & Co.']
 const cleaningLabels  = ['Cleanworks Adelaide', 'MY HOME Cleaning', 'BrightTouch Specialist']
@@ -219,12 +233,40 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .tribe-nav__brand:hover .tribe-nav__logo-text {
   filter: brightness(1.15);
 }
+.tribe-nav__home-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.35);
+  background: transparent;
+  transition: all 0.2s;
+  margin-left: 0.25rem;
+  -webkit-text-fill-color: initial;
+}
+.tribe-nav__home-pill--active {
+  border-color: rgba(0,123,255,0.4);
+  color: #60a5fa;
+  background: rgba(0,123,255,0.08);
+}
 
 /* ── Desktop links ── */
 .tribe-nav__links {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.75rem;
+}
+.tribe-nav__work-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.1em;
+  margin-right: 0.25rem;
 }
 @media (max-width: 767px) {
   .tribe-nav__links { display: none; }
