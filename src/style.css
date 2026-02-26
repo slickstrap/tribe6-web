@@ -34,3 +34,15 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
+
+.brand-text {
+  font-family: 'Pacifico', cursive !important;
+  background: linear-gradient(135deg, #e2c4ff 0%, #f8d58b 100%);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  text-transform: none !important;
+}
+

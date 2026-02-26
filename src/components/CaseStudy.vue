@@ -195,11 +195,7 @@ const techPoints = [
 
 /* ── Typography & Brand ── */
 .brand-text {
-  font-family: 'Pacifico', cursive !important;
-  background: linear-gradient(135deg, #e2c4ff 0%, #f8d58b 100%);
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
+  font-size: 1.1em; /* Slight adjustment if needed, but the global one will handle the rest */
 }
 
 .text-accent {

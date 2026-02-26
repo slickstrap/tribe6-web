@@ -42,14 +42,6 @@ defineEmits(['navigate', 'open-contact'])
   margin-bottom: 0.5rem;
 }
 
-.brand-text {
-  font-family: 'Pacifico', cursive !important;
-  background: linear-gradient(135deg, #e2c4ff 0%, #f8d58b 100%);
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-}
-
 .footer-tagline {
   font-size: 0.85rem;
   color: rgba(232,232,240,0.4);

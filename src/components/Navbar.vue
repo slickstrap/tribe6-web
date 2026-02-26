@@ -5,8 +5,8 @@
   >
     <div class="tribe-nav__inner">
       <!-- ── Brand ── -->
-      <div class="tribe-nav__brand" @click="$emit('go-home')">
-        <span class="tribe-nav__logo-text">Tribe6</span>
+      <div class="tribe-nav__brand" @click="handleBrandClick">
+        <span class="brand-text" style="font-size: 1.55rem;">Tribe6</span>
         <span class="tribe-nav__home-pill" :class="{ 'tribe-nav__home-pill--active': currentPage === 'portfolio' }">Portfolio</span>
       </div>
 
@@ -17,6 +17,16 @@
           :class="{ 'tribe-nav__btn--active': currentPage === 'case-study' }"
           @click="$emit('go-case-study')"
         >Case Study</button>
+        <button 
+          v-if="isAuthenticated && hasKnowledgeAccess"
+          class="tribe-nav__btn" 
+          @click="router.push('/knowledge')"
+        >Knowledge Base</button>
+        <button 
+          v-if="isAuthenticated && hasChangelogAccess"
+          class="tribe-nav__btn" 
+          @click="router.push('/changelog')"
+        >Changelog</button>
         <span class="tribe-nav__work-label">Sample Work:</span>
 
         <!-- Cosmetics dropdown -->
@@ -85,6 +95,22 @@
           </Transition>
         </div>
 
+        <!-- Admin Command Center (Visible only to admins) -->
+        <button 
+          v-if="isAdmin"
+          class="tribe-nav__btn ml-4 border border-indigo-500 text-indigo-400 hover:bg-indigo-500 hover:text-white transition rounded-full px-5!"
+          @click="router.push('/command-center')"
+        >
+          Command Center
+        </button>
+
+        <!-- Portal Button -->
+        <button 
+          class="tribe-nav__btn ml-4 border border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-white transition rounded-full px-5!"
+          @click="navigatePortal"
+        >
+          {{ isAuthenticated ? 'My Profile' : 'Portal Login' }}
+        </button>
       </div>
 
       <!-- ── Mobile hamburger ── -->
@@ -110,6 +136,16 @@
           :class="{ 'tribe-nav__mobile-item--active': currentPage === 'case-study' }"
           @click="$emit('go-case-study'); mobileOpen = false"
         >Case Study</button>
+        <button 
+          v-if="isAuthenticated && hasKnowledgeAccess"
+          class="tribe-nav__mobile-item" 
+          @click="router.push('/knowledge'); mobileOpen = false"
+        >Knowledge Base</button>
+        <button 
+          v-if="isAuthenticated && hasChangelogAccess"
+          class="tribe-nav__mobile-item" 
+          @click="router.push('/changelog'); mobileOpen = false"
+        >Changelog</button>
         
         <p class="tribe-nav__mobile-label">Cosmetics Samples</p>
         <button
@@ -134,13 +170,39 @@
           <span class="tribe-nav__dot tribe-nav__dot--sky"></span>
           {{ cleaningLabels[n - 1] }}
         </button>
+        <!-- Mobile Admin Link -->
+        <button 
+          v-if="isAdmin"
+          class="tribe-nav__mobile-item mt-2 border border-indigo-500/30 text-indigo-400 justify-center"
+          @click="router.push('/command-center'); mobileOpen = false"
+        >
+          Admin Command Center
+        </button>
+
+        <button 
+          class="tribe-nav__mobile-item mt-4 border border-electric-blue text-electric-blue justify-center"
+          @click="navigatePortal"
+        >
+          {{ isAuthenticated ? 'My Profile' : 'Portal Login' }}
+        </button>
       </div>
     </Transition>
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watchEffect } from 'vue'
+import { useRouter } from 'vue-router'
+import { supabase } from '../supabase'
+import { useAuth } from '../composables/useAuthSync'
+
+const router = useRouter()
+const { user, session, profile, checkSession } = useAuth()
+
+const isAuthenticated = computed(() => !!session.value)
+const userProfile = computed(() => profile.value)
+const isAdmin = computed(() => profile.value?.role === 'admin')
+const userPermissions = ref([])
 
 const props = defineProps({
   activeNiche:  String,
@@ -156,9 +218,27 @@ const openMenu   = ref(null)
 const mobileOpen = ref(false)
 const scrolled   = ref(false)
 
+const hasKnowledgeAccess = computed(() => {
+  if (isAdmin.value) return true
+  return userPermissions.value.includes('/knowledge')
+})
+
+const hasChangelogAccess = computed(() => {
+  if (isAdmin.value) return true
+  return userPermissions.value.includes('/changelog')
+})
+
 function openDropdown(menu)  { openMenu.value = menu }
 function closeDropdown(menu) { if (openMenu.value === menu) openMenu.value = null }
 function toggleDropdown(menu){ openMenu.value = openMenu.value === menu ? null : menu }
+
+function handleBrandClick() {
+  if (isAuthenticated.value) {
+    router.push('/profile')
+  } else {
+    emit('go-home')
+  }
+}
 
 function handleSwitch(niche, sample) {
   emit('switch', { niche, sample })
@@ -166,8 +246,47 @@ function handleSwitch(niche, sample) {
   mobileOpen.value = false
 }
 
+function navigatePortal() {
+  if (isAuthenticated.value) {
+    router.push('/profile')
+  } else {
+    router.push('/login')
+  }
+}
+
 function onScroll() { scrolled.value = window.scrollY > 20 }
-onMounted(()   => window.addEventListener('scroll', onScroll))
+
+onMounted(async () => {
+  window.addEventListener('scroll', onScroll)
+  try {
+    await checkSession()
+  } catch (err) {
+    console.warn('Navbar auth check failed:', err)
+  }
+})
+
+// Permissions still need to be fetched specifically for the user
+watchEffect(async () => {
+  if (user.value) {
+    await fetchUserPermissions(user.value.id)
+  } else {
+    userPermissions.value = []
+  }
+})
+
+// Profile is now handled by useAuth common state
+
+async function fetchUserPermissions(userId) {
+  const { data } = await supabase
+    .from('page_access')
+    .select('page_identifier')
+    .eq('user_id', userId)
+  
+  if (data) {
+    userPermissions.value = data.map(p => p.page_identifier)
+  }
+}
+
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
 
@@ -219,15 +338,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   user-select: none;
 }
 .tribe-nav__logo-text {
-  font-family: 'Pacifico', cursive;
-  font-size: 1.55rem;
-  color: #fff;
   line-height: 1;
-  background: linear-gradient(135deg, #e2c4ff 0%, #f8d58b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: none;
   transition: filter 0.2s;
 }
 .tribe-nav__brand:hover .tribe-nav__logo-text {

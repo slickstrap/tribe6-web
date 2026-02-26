@@ -70,7 +70,7 @@
                 <span v-if="!formLoading">Send Message →</span>
                 <span v-else class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
               </button>
-              <p class="form-privacy">No spam. No sharing. Direct communication with Tribe6.</p>
+              <p class="form-privacy">No spam. No sharing. Direct communication with <span class="brand-text">Tribe6</span>.</p>
             </form>
           </div>
         </div>

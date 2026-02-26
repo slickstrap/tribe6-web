@@ -99,7 +99,7 @@
           The Full Stack of<br/>
           <span class="text-accent">Digital Growth.</span>
         </h2>
-        <p class="section-sub">Five core disciplines. One focused studio. The Tribe6 Advantage.</p>
+        <p class="section-sub">Five core disciplines. One focused studio. The <span class="brand-text text-white">Tribe6</span> Advantage.</p>
 
         <div class="bento-grid">
           <div v-for="(svc, i) in services" :key="svc.title"
@@ -127,10 +127,10 @@
               <span class="text-accent">You Drive the Growth.</span>
             </h2>
             <p class="about-body">
-              At <span class="brand-text">Tribe6</span>, we don't just build websites — we build <strong>business tools</strong>. Tribe6 is a specialized studio for digital infrastructure. We bridge the gap between "having a website" and "having a high-performing lead machine."
+              At <span class="brand-text">Tribe6</span>, we don't just build websites — we build <strong>business tools</strong>. <span class="brand-text">Tribe6</span> is a specialized studio for digital infrastructure. We bridge the gap between "having a website" and "having a high-performing lead machine."
             </p>
             <p class="about-body">
-              We help businesses stop losing leads and start automating their growth. Whether you're a startup looking for your first landing page or an established company needing complex system integration — Tribe6 delivers measurable results, not just deliverables.
+              We help businesses stop losing leads and start automating their growth. Whether you're a startup looking for your first landing page or an established company needing complex system integration — <span class="brand-text">Tribe6</span> delivers measurable results, not just deliverables.
             </p>
             <div class="about-pillars">
               <div v-for="pillar in pillars" :key="pillar.label" class="pillar">
@@ -150,7 +150,7 @@
                 <div class="id-logo">T6</div>
                 <div>
                   <div class="id-name"><span class="brand-text">Tribe6</span> Studio</div>
-                  <div class="id-role">Tribe6 Systems · Principal Consultant</div>
+                  <div class="id-role"><span class="brand-text text-[0.7rem] opacity-70">Tribe6</span> Systems · Principal Consultant</div>
                 </div>
               </div>
               <div class="id-divider"></div>
@@ -336,17 +336,6 @@ function openModal() { emit('open-contact') }
   font-family: 'Inter', 'Manrope', system-ui, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-.brand-text {
-  font-family: 'Pacifico', cursive !important;
-  background: linear-gradient(135deg, #e2c4ff 0%, #f8d58b 100%);
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  font-weight: normal !important;
-  font-style: normal !important;
-  text-transform: none !important;
 }
 
 /* ══════════ HERO ══════════ */
