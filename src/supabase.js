@@ -1,7 +1,5 @@
-// Supabase: v1.3.3 - DEFINITIVE LOCK BYPASS
+// Supabase Client — Lock Manager bypass for browser compatibility
 import { createClient } from '@supabase/supabase-js'
-
-console.log('Supabase: v1.3.3 Client Initializing with Lock Bypass...')
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY

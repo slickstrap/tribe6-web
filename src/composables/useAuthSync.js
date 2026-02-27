@@ -41,13 +41,11 @@ async function fetchProfile(authUser) {
 }
 
 async function initializeAuth() {
-    console.log('AuthSync: v1.3.3 checkSession called')
     if (initialized.value) return { user: user.value, session: session.value, profile: profile.value }
     if (initPromise) return initPromise
 
     initPromise = (async () => {
         try {
-            console.log('AuthSync: v1.3.3 Initializing...')
             // getSession is the core of the deadlock, but custom storage in supabase.js should fix it
             const { data: { session: initialSession }, error } = await supabase.auth.getSession()
             if (error) throw error
@@ -58,7 +56,6 @@ async function initializeAuth() {
 
             // Register listener AFTER initial check to avoid race conditions
             supabase.auth.onAuthStateChange(async (event, newSession) => {
-                console.log('AuthSync: v1.3.3 Auth Event:', event)
                 session.value = newSession
                 user.value = newSession?.user ?? null
                 if (user.value) await fetchProfile(user.value)

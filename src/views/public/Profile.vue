@@ -141,7 +141,7 @@
                   </div>
                 </div>
                 <h4 class="text-lg font-black text-white mb-2 text-left tracking-tight group-hover:text-electric-blue transition-colors">{{ item.label }}</h4>
-                <p class="text-sm text-slate-500 leading-relaxed text-left group-hover:text-slate-400 transition-colors" v-html="item.description"></p>
+                <p class="text-sm text-slate-500 leading-relaxed text-left group-hover:text-slate-400 transition-colors">{{ item.description }}</p>
               </div>
             </div>
 
@@ -277,12 +277,11 @@ const errorMsg = ref('')
 
 // Inactivity Timeout Logic (1 Minute)
 let inactivityTimer = null
-const INACTIVITY_LIMIT = 60 * 1000 // 60 seconds
+const INACTIVITY_LIMIT = 15 * 60 * 1000 // 15 minutes
 
 function resetInactivityTimer() {
   if (inactivityTimer) clearTimeout(inactivityTimer)
   inactivityTimer = setTimeout(() => {
-    console.log('Inactivity logout triggered')
     handleLogout()
   }, INACTIVITY_LIMIT)
 }
@@ -444,7 +443,7 @@ async function updateProfile() {
         company: profile.value.company,
         custom_fields: profile.value.custom_fields,
       })
-      .eq('id', user.id)
+      .eq('id', user.value.id)
 
     if (error) throw error
     
@@ -460,14 +459,10 @@ async function updateProfile() {
 
 async function handleLogout() {
   try {
-    console.log('Initiating logout...')
-    const { error } = await supabase.auth.signOut()
-    if (error) throw error
-    console.log('Logout successful, redirecting...')
-  } catch (err) {
-    console.error('Logout error:', err)
+    await supabase.auth.signOut()
+  } catch {
+    // Swallow errors — redirect regardless
   } finally {
-    // Force redirect even if signOut errors/hangs
     router.push('/login').catch(() => {
       window.location.href = '/login'
     })

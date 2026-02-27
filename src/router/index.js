@@ -108,38 +108,32 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
     try {
-        // 1. Authentication Check
-        const { checkSession } = useAuth()
+        // 1. Authentication Check — use cached composable state
+        const { checkSession, profile: cachedProfile } = useAuth()
         const { session } = await checkSession()
         const isAuthenticated = !!session
 
         // 2. Edge Function IP Check (Global Geo-Block)
-        // Run this now that session/auth is stable
+        // Non-blocking — runs in background so it doesn't slow navigation
         supabase.functions.invoke('process-traffic', {
             body: { path: to.fullPath }
         }).then(({ data }) => {
             if (data && data.blocked) {
                 window.location.href = 'https://google.com'
             }
-        }).catch(err => console.error('Traffic process error:', err))
+        }).catch(() => { })
 
         if (to.meta.requiresAuth && !isAuthenticated) {
             return '/login'
         }
 
-        // 3. Admin Role Check
+        // 3. Admin Role Check — use cached profile from composable (no extra DB call)
         let isAdmin = false
         if (isAuthenticated) {
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('role')
-                .eq('id', session.user.id)
-                .single()
-
-            isAdmin = profile?.role === 'admin'
+            isAdmin = cachedProfile.value?.role === 'admin'
 
             if (to.meta.requiresAdmin && !isAdmin) {
-                return '/profile' // Redirect non-admins trying to access /admin
+                return '/profile'
             }
         }
 
@@ -153,15 +147,14 @@ router.beforeEach(async (to, from) => {
                 .single()
 
             if (!access) {
-                return '/profile' // Redirect if no explicit access granted
+                return '/profile'
             }
         }
 
-        // Pass along safely
         return true
     } catch (err) {
-        console.error('Router navigation error:', err)
-        return true
+        // SECURITY: On any error, redirect to login — never grant access silently
+        return '/login'
     }
 })
 
